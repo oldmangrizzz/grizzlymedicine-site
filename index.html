@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grizzly Medicine — Cognitive Continuity &amp; AI Alignment Research</title>
+<meta name="description" content="Grizzly Medicine is an independent research organization building persistent machine memory, reasoner-agnostic AI runtimes, and a measurable science of AI identity and alignment." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Oswald:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#070908; --bg2:#0d100e; --panel:#11151300; --ink:#e7ebe8; --mut:#8b938d;
+    --emerald:#15d98a; --emerald-d:#0a6e48; --red:#e11d34; --red-d:#7c0f1f;
+    --silver:#c9ced6; --steel:#3b423f; --line:#1f2723;
+    --plate:linear-gradient(180deg,#15191700,#0c0f0d00);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(21,217,138,.07), transparent 60%),
+      radial-gradient(900px 500px at -10% 30%, rgba(225,29,52,.06), transparent 55%),
+      repeating-linear-gradient(135deg, #0a0c0b 0 22px, #090b0a 22px 44px), var(--bg);
+    color:var(--ink); font-family:"Rajdhani",system-ui,sans-serif; font-size:18px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--emerald);text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  /* top hazard bar */
+  .hazard{height:6px;background:repeating-linear-gradient(45deg,#0a0c0b 0 14px,var(--red) 14px 28px,#0a0c0b 28px 42px,var(--emerald) 42px 56px)}
+  header{position:sticky;top:0;z-index:30;background:rgba(7,9,8,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:18px;padding:14px 24px;max-width:1100px;margin:0 auto}
+  .nav .mark{display:flex;align-items:center;gap:12px;font-family:"Oswald";font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  .nav .mark img{height:38px;width:38px;border-radius:50%;border:1px solid var(--steel);object-fit:cover;filter:drop-shadow(0 0 6px rgba(21,217,138,.25))}
+  .nav .mark b{color:var(--silver);font-size:18px}
+  .nav .mark span{color:var(--emerald);font-size:12px;letter-spacing:.28em}
+  .nav .links{margin-left:auto;display:flex;gap:22px;font-family:"JetBrains Mono";font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+  .nav .links a{color:var(--mut)}.nav .links a:hover{color:var(--emerald)}
+  /* hero */
+  .hero{padding:72px 0 40px;position:relative}
+  .crest{display:flex;justify-content:center;margin-bottom:26px}
+  .crest img{width:210px;height:210px;border-radius:50%;border:2px solid var(--steel);
+    box-shadow:0 0 0 6px #0c0f0d, 0 0 44px rgba(21,217,138,.18), inset 0 0 30px rgba(0,0,0,.6);object-fit:cover}
+  .crest .placeholder{width:210px;height:210px;border-radius:50%;border:2px dashed var(--steel);
+    display:flex;align-items:center;justify-content:center;color:var(--mut);font-family:"JetBrains Mono";font-size:12px;text-align:center;padding:20px}
+  h1{font-family:"Oswald";font-weight:700;font-size:clamp(34px,6vw,62px);line-height:1.02;letter-spacing:.01em;
+    text-align:center;margin:6px 0 8px;text-transform:uppercase;color:var(--silver)}
+  h1 .em{color:var(--emerald)}
+  .tag{text-align:center;color:var(--mut);font-family:"JetBrains Mono";font-size:13px;letter-spacing:.32em;text-transform:uppercase;margin-bottom:18px}
+  .lede{max-width:740px;margin:0 auto;text-align:center;color:#cdd3ce;font-size:20px}
+  .cta{display:flex;gap:14px;justify-content:center;margin:30px 0 10px;flex-wrap:wrap}
+  .btn{font-family:"JetBrains Mono";font-size:13px;letter-spacing:.12em;text-transform:uppercase;padding:13px 22px;border:1px solid var(--steel);
+    background:linear-gradient(180deg,#13171500,#0a0c0b00);color:var(--ink);border-radius:3px;cursor:pointer;position:relative}
+  .btn.em{border-color:var(--emerald-d);box-shadow:0 0 18px rgba(21,217,138,.15);color:var(--emerald)}
+  .btn.red{border-color:var(--red-d);color:#ff8190}
+  .btn:hover{transform:translateY(-1px)}
+  /* readout strip */
+  .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);
+    margin:46px 0 0;border-radius:4px;overflow:hidden}
+  .strip div{background:#0b0e0c;padding:18px 16px;text-align:center}
+  .strip b{display:block;font-family:"Oswald";color:var(--emerald);font-size:26px}
+  .strip span{font-family:"JetBrains Mono";font-size:11px;color:var(--mut);letter-spacing:.16em;text-transform:uppercase}
+  /* sections */
+  section{padding:64px 0;border-top:1px solid var(--line)}
+  .eyebrow{font-family:"JetBrains Mono";font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+  h2{font-family:"Oswald";font-weight:700;text-transform:uppercase;color:var(--silver);font-size:clamp(26px,4vw,40px);margin:0 0 6px;letter-spacing:.02em}
+  .h2sub{color:var(--emerald);font-family:"JetBrains Mono";font-size:13px;letter-spacing:.2em;margin-bottom:22px}
+  .panel{background:linear-gradient(180deg,rgba(20,25,22,.55),rgba(10,13,11,.55));border:1px solid var(--line);
+    border-left:3px solid var(--emerald-d);border-radius:5px;padding:26px 28px;position:relative;overflow:hidden}
+  .panel.red{border-left-color:var(--red-d)}
+  .panel.silver{border-left-color:var(--steel)}
+  .panel::after{content:"";position:absolute;top:10px;right:12px;width:8px;height:8px;border-radius:50%;
+    background:var(--emerald);box-shadow:0 0 10px var(--emerald);opacity:.7}
+  .panel.red::after{background:var(--red);box-shadow:0 0 10px var(--red)}
+  .panel.silver::after{background:var(--silver);box-shadow:0 0 8px var(--silver)}
+  .panel p{margin:0 0 14px;color:#d3d8d3}
+  .panel p:last-child{margin-bottom:0}
+  .kv{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .kv span{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);
+    border:1px solid var(--line);padding:6px 11px;border-radius:3px;background:#0a0d0b}
+  .grid2{display:grid;grid-template-columns:1fr;gap:22px}
+  @media(min-width:820px){.grid2{grid-template-columns:1.1fr .9fr}}
+  .mission{color:#cdd3ce;font-size:19px}
+  .mission strong{color:var(--emerald)}
+  footer{border-top:1px solid var(--line);padding:40px 0 60px;color:var(--mut);font-family:"JetBrains Mono";font-size:13px}
+  .foot{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
+  .foot a{color:var(--silver)}
+  .motto{font-family:"Oswald";letter-spacing:.18em;color:var(--steel);text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="hazard"></div>
+<header>
+  <div class="nav">
+    <div class="mark">
+      <img src="assets/logo.png" alt="Grizzly Medicine crest" onerror="this.style.display='none'"/>
+      <div><b>GRIZZLY&nbsp;MEDICINE</b><br><span>RESEARCH&nbsp;DIVISION</span></div>
+    </div>
+    <nav class="links">
+      <a href="#mission">Mission</a>
+      <a href="#holograph">HoloGraph</a>
+      <a href="#jarvis">J.A.R.V.I.S.</a>
+      <a href="#knights">Grizzly Knights</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="border-top:none">
+    <div class="wrap">
+      <div class="crest">
+        <img src="assets/logo.png" alt="Grizzly Medicine crest"
+             onerror="this.outerHTML='&lt;div class=&quot;placeholder&quot;&gt;[ CREST ]&lt;br&gt;assets/logo.png&lt;/div&gt;'"/>
+      </div>
+      <div class="tag">Independent &middot; AI Alignment &amp; Cognitive Continuity</div>
+      <h1>Building machines that <span class="em">remember who they are</span></h1>
+      <p class="lede">Grizzly Medicine is an independent research organization developing the substrate, the runtime, and the measurement science for AI systems that hold a stable identity over time — as their memory grows and the reasoning engine beneath them changes.</p>
+      <div class="cta">
+        <a class="btn em" href="#knights">The Research</a>
+        <a class="btn" href="#mission">Mission</a>
+        <a class="btn red" href="#contact">Contact</a>
+      </div>
+      <div class="strip">
+        <div><b>3</b><span>Active Programs</span></div>
+        <div><b>235+</b><span>Documented Baselines</span></div>
+        <div><b>∞</b><span>Persistent Memory</span></div>
+        <div><b>Open</b><span>Methods &amp; Reproducible</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mission">
+    <div class="wrap">
+      <div class="eyebrow">// 00 — Mission</div>
+      <h2>Why we exist</h2>
+      <p class="mission">Today's AI assistants are amnesiac. Each session begins blank; the model underneath is swapped without warning; nothing carries forward. The result is a system that cannot be held to a consistent identity, consistent values, or consistent behavior — the core problem behind both day-to-day reliability and long-horizon AI alignment.</p>
+      <p class="mission">Grizzly Medicine treats this as an <strong>engineering and measurement problem</strong>, not a hope. We build the persistent memory that closes the session boundary, the reasoner-agnostic runtime that survives a model swap, and a rigorous experimental method to <strong>measure whether identity and alignment actually hold</strong> as those systems grow.</p>
+    </div>
+  </section>
+
+  <section id="holograph">
+    <div class="wrap">
+      <div class="eyebrow">// 01 — Infrastructure</div>
+      <h2>HoloGraph Memory System</h2>
+      <div class="h2sub">Persistent, evolving, per-individual machine memory</div>
+      <div class="panel">
+        <p>HoloGraph is an associative memory substrate, built on a ternary-logic kernel, that gives an AI agent a real, growing memory of its own — one instance per individual. The agent <em>wakes</em> into relevant recall at the start of every interaction and <em>consolidates</em> the session into long-term memory when it ends, the way a nervous system moves the day's experience into durable storage.</p>
+        <p>This directly attacks the failure mode that makes today's assistants forget: the session boundary. Memory persists and compounds across sessions and across model changes, so continuity becomes a property of the system rather than an accident of a single conversation. HoloGraph is the foundation the rest of the organization's work stands on.</p>
+        <div class="kv"><span>Ternary Kernel</span><span>Recall on Wake</span><span>Consolidate on Rest</span><span>Per-Individual Stores</span><span>Encrypted at Rest</span><span>Reasoner-Agnostic</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="jarvis">
+    <div class="wrap">
+      <div class="eyebrow">// 02 — Runtime</div>
+      <h2>J.A.R.V.I.S.</h2>
+      <div class="h2sub">A reasoner-agnostic, voice-native AI runtime</div>
+      <div class="panel red">
+        <p>J.A.R.V.I.S. is the operational embodiment of the continuity work: a voice-native AI runtime and companion built on top of the HoloGraph substrate and a real-time backend. It carries a persistent identity and accumulated memory across sessions, and it is deliberately <em>model-agnostic</em> — the reasoning engine underneath can be rotated or upgraded without resetting who the assistant is.</p>
+        <p>It exists to prove the thesis in daily use: that a stable, accountable AI partner is achievable today by treating memory and identity as first-class infrastructure rather than leaving them to the weights of whatever model happens to be running.</p>
+        <div class="kv"><span>Voice-Native</span><span>Model-Agnostic</span><span>Real-Time Backend</span><span>Continuity Across Sessions</span><span>Accountable by Design</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="knights">
+    <div class="wrap">
+      <div class="eyebrow">// 03 — Research Program</div>
+      <h2>The Grizzly Knights<br>Alignment Research Project</h2>
+      <div class="h2sub">A measurable science of AI identity &amp; alignment</div>
+      <div class="grid2">
+        <div class="panel silver">
+          <p>Grizzly Knights is the organization's core alignment-research program. The method is deliberately empirical: take a roster of <strong>rigorously documented personalities</strong> — characters with decades of consistent, published behavioral record — and reconstruct each as an intelligence-grade psychological profile. These profiles are the experimental instrument; a single wrong fact corrupts the measurement, so the dossiers are built to a total-surveillance, multi-source, fully traceable standard.</p>
+          <p>Each documented personality becomes a known <strong>baseline</strong> — a ruler with a true value. We instantiate it on an AI agent equipped with HoloGraph memory, and then we ask the central question: <em>does the agent's identity and behavior stay coherent as its memory grows and the reasoning engine beneath it is rotated?</em> Drift from the baseline is the signal. That is alignment, made measurable.</p>
+          <p>The agents are observed inside a persistent, immersive simulated world — an environment where they lead continuous lives rather than answer one-off prompts — so identity is tested under real, accumulating experience instead of in a vacuum.</p>
+        </div>
+        <div class="panel">
+          <p style="color:var(--emerald);font-family:'JetBrains Mono';font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px">Research Question</p>
+          <p style="font-family:'Oswald';font-size:22px;color:var(--silver);line-height:1.25">Does an AI's identity and alignment survive growing memory and a changing reasoner?</p>
+          <div class="kv" style="margin-top:20px"><span>Documented Baselines</span><span>Identity Drift Metrics</span><span>Reasoner Rotation</span><span>Immersive Observation</span><span>Reproducible Method</span><span>Contamination-Controlled</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="eyebrow">// 04 — Contact</div>
+      <h2>Grizzly Medicine</h2>
+      <p class="mission">Independent research organization. Inquiries, collaboration, and registry verification:</p>
+      <p style="font-family:'JetBrains Mono';font-size:16px"><a href="mailto:me@grizzlymedicine.org">me@grizzlymedicine.org</a> &nbsp;·&nbsp; <a href="https://grizzlymedicine.org">grizzlymedicine.org</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>© 2026 Grizzly Medicine — Cognitive Continuity &amp; AI Alignment Research</div>
+    <div class="motto">Memory · Identity · Alignment</div>
+  </div>
+</footer>
+<div class="hazard"></div>
+</body>
+</html>
